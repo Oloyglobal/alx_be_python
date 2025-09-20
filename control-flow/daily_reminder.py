@@ -8,13 +8,13 @@ time_bound = input("Is it time-bound? (yes/no): ").lower()
 # Match Case for priority-based response
 match priority:
     case "high":
-        reminder = f"⚡ High Priority: Don't forget to {task}."
+        reminder = f"Reminder: High Priority - Don't forget to {task}."
     case "medium":
-        reminder = f"📌 Medium Priority: Make sure you {task} today."
+        reminder = f"Reminder: Medium Priority - Make sure you {task} today."
     case "low":
-        reminder = f"📝 Low Priority: You should {task} when you have free time."
+        reminder = f"Reminder: Low Priority - You should {task} when you have free time."
     case _:
-        reminder = f"❓ Priority not recognized. Still, remember to {task}."
+        reminder = f"Reminder: Priority not recognized. Still, remember to {task}."
 
 # Conditional check for time sensitivity
 if time_bound == "yes":
