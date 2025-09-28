@@ -1,31 +1,37 @@
-# Global conversion factors
-CELSIUS_TO_FAHRENHEIT_FACTOR = 9 / 5
-FAHRENHEIT_TO_CELSIUS_FACTOR = 5 / 9
+# temp_conversion_tool.py
+
+CELSIUS_TO_FAHRENHEIT_FACTOR = 9/5
+FAHRENHEIT_TO_CELSIUS_FACTOR = 5/9
+FREEZING_POINT_FAHRENHEIT = 32
 
 
-def celsius_to_fahrenheit(celsius):
-    """Convert Celsius to Fahrenheit"""
-    return (celsius * CELSIUS_TO_FAHRENHEIT_FACTOR) + 32
+def convert_to_celsius(fahrenheit):
+    """Convert Fahrenheit to Celsius."""
+    return (fahrenheit - FREEZING_POINT_FAHRENHEIT) * FAHRENHEIT_TO_CELSIUS_FACTOR
 
 
-def fahrenheit_to_celsius(fahrenheit):
-    """Convert Fahrenheit to Celsius"""
-    return (fahrenheit - 32) * FAHRENHEIT_TO_CELSIUS_FACTOR
+def convert_to_fahrenheit(celsius):
+    """Convert Celsius to Fahrenheit."""
+    return (celsius * CELSIUS_TO_FAHRENHEIT_FACTOR) + FREEZING_POINT_FAHRENHEIT
 
 
 def main():
+    """Main function for user interaction."""
     try:
-        choice = input("Choose conversion: (C/F): ").strip().upper()
-        if choice == "C":
-            celsius = float(input("Enter temperature in Celsius: "))
-            print("In Fahrenheit:", celsius_to_fahrenheit(celsius))
-        elif choice == "F":
-            fahrenheit = float(input("Enter temperature in Fahrenheit: "))
-            print("In Celsius:", fahrenheit_to_celsius(fahrenheit))
+        temp = float(input("Enter the temperature to convert: "))
+        unit = input("Is this temperature in Celsius or Fahrenheit? (C/F): ").strip().upper()
+
+        if unit == "C":
+            converted = convert_to_fahrenheit(temp)
+            print(f"{temp}°C is {converted}°F")
+        elif unit == "F":
+            converted = convert_to_celsius(temp)
+            print(f"{temp}°F is {converted}°C")
         else:
-            print("Invalid choice")
+            print("Invalid unit. Please enter 'C' for Celsius or 'F' for Fahrenheit.")
     except ValueError:
-        print("Invalid input. Please enter a number.")
+        # ALX expects a ValueError with this exact message when the temperature is invalid
+        raise ValueError("Invalid temperature. Please enter a numeric value.")
 
 
 if __name__ == "__main__":
